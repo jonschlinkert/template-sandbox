@@ -1,0 +1,44 @@
+{
+  "name": "bootstrap-handlebars",
+  "description": "Convert the most recent version of Bootstrap, or the bootstap blog, to handlebars templates.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/bootstrap-handlebars",
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "jonschlinkert/bootstrap-handlebars",
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/bootstrap-handlebars/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "ansi-red": "^0.1.1",
+    "async": "^1.4.0",
+    "cp-file": "^2.2.1",
+    "engine-handlebars": "^0.6.1",
+    "ext-map": "^1.0.1",
+    "gulp": "^3.9.0",
+    "gulp-extname": "^0.2.0",
+    "handlebars-helpers": "assemble/handlebars-helpers#v0.6.0",
+    "helper-markdown": "^0.1.1",
+    "liquid-to-handlebars": "^0.3.2",
+    "mocha": "*",
+    "parser-front-matter": "^1.2.1",
+    "relative-dest": "^0.1.0",
+    "should": "*",
+    "template": "^0.15.0",
+    "template-helpers": "^0.3.2",
+    "through2": "^2.0.0",
+    "write": "^0.2.0"
+  },
+  "keywords": []
+}

@@ -61,12 +61,27 @@ app.helper('assets', function () {
   return relativePath(dest, this.context.assets || '');
 });
 
-app.helper('relative', function (key) {
-  var destView = this.app.posts.get(key);
-  var view = this.context.view;
-  // console.log(view.data.dest, ' ==> ', destView.data.dest);
-  var dest = view.data.dest || view.path;
-  return relativePath(dest, destView.data.dest || destView.data.path);
+app.helper('link-to', function (key, collection, options) {
+  if (typeof collection === 'object') {
+    options = collection;
+    collection = null;
+  }
+  collection = collection || 'pages';
+  if (typeof this.app[collection] === 'undefined') {
+    var msg = 'Invalid collection `' + collection + '`';
+    console.error(red(msg));
+    throw new Error(msg);
+  }
+  var fromView = this.context.view;
+  var toView = this.app[collection].get(key);
+  if (!toView) {
+    var msg = 'Unable to find ' + key + ' in ' + collection;
+    console.error(red(msg));
+    throw new Error(msg);
+  }
+  var fromDest = fromView.data.dest;
+  var toDest = toView.data.dest;
+  return relativePath(fromDest, toDest);
 });
 
 app.helper('markdown', require('helper-markdown'));

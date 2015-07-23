@@ -6,7 +6,6 @@ var loaders = require('./lib/loaders');
 var path = require('path');
 var async = require('async');
 var write = require('write');
-var relativePath = require('relative-dest');
 var convert = require('liquid-to-handlebars');
 var matter = require('parser-front-matter');
 var copy = require('cp-file');

@@ -1,6 +1,6 @@
 'use strict';
 
-// var helpers = require('./lib/helpers');
+var helpers = require('./lib/helpers');
 var loaders = require('./lib/loaders');
 
 var path = require('path');
@@ -148,11 +148,11 @@ var config = {
  * Load includes and layouts...
  */
 
-app.layouts('src/_docs/_layouts/*.hbs');
-app.includes('src/_docs/_includes/**/*.hbs');
+app.layouts('src/docs/_layouts/*.hbs');
+app.includes('src/docs/_includes/**/*.hbs');
 
 
-var posts = app.posts('src/_docs/*.hbs');
+var posts = app.posts('src/docs/*.hbs');
 posts.forOwn(function (view) {
   // view.ctx('locals', {base: '.'});
   var parsed = view.parsePath();

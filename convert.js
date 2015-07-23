@@ -24,13 +24,6 @@ app.onLoad(/\.(hbs|md)$/, function (view, next) {
   matter.parse(view, next);
 });
 
-// app.preRender(/\.(hbs|md)$/, function (view, next) {
-//   var parsed = view.parsePath();
-//   var destpath = view.permalink('_gh_pages/:base/:name.html', parsed);
-//   view.data.dest = destpath;
-//   next();
-// });
-
 /**
  * Engine
  */
@@ -41,57 +34,12 @@ app.engine(['html', 'hbs', 'md'], require('engine-handlebars'));
  * Register helpers
  */
 
-app.helper('is', function (a, b, options) {
-  if (arguments.length !== 3) {
-    console.log('`is` helper is missing an argument. start by looking in: ' + this.context.view.path);
-  }
-  if (a === b) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});
-app.helper('date_to_string', function () {
-  return ''
-});
-
-app.helper('assets', function () {
-  var view = this.context.view;
-  var dest = view.data.dest || view.path;
-  return relativePath(dest, this.context.assets || '');
-});
-
-app.helper('link-to', function (key, collection, options) {
-  if (typeof collection === 'object') {
-    options = collection;
-    collection = null;
-  }
-  collection = collection || 'pages';
-  if (typeof this.app[collection] === 'undefined') {
-    var msg = 'Invalid collection `' + collection + '`';
-    console.error(red(msg));
-    throw new Error(msg);
-  }
-  var fromView = this.context.view;
-  var toView = this.app[collection].get(key);
-  if (!toView) {
-    var msg = 'Unable to find ' + key + ' in ' + collection;
-    console.error(red(msg));
-    throw new Error(msg);
-  }
-  var fromDest = fromView.data.dest;
-  var toDest = toView.data.dest;
-  return relativePath(fromDest, toDest);
-});
-
+app.helper('assets', helpers.assets);
+app.helper('link-to', helpers.linkTo);
 app.helper('markdown', require('helper-markdown'));
+app.helper('date_to_string', function () {});
+app.helper('is', helpers.is);
 
-// var collections = Object.keys(helpers.helpers);
-
-// collections.forEach(function (key) {
-//   var collection = helpers.helpers[key];
-//   app.visit('helpers', collection);
-// });
 
 /**
  * Config
@@ -107,6 +55,7 @@ var config = {
     ext: '.hbs',
   }
 };
+
 function rename(fp) {
   return fp;
 }
